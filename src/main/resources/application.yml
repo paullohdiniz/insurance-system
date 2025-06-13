@@ -1,0 +1,79 @@
+spring:
+  application:
+    name: insurance-system
+
+  # Database H2 Configuration
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # Server Configuration
+  server:
+    port: 8080
+    servlet:
+      context-path: /api
+
+# Resilience4j Configuration
+resilience4j:
+  circuitbreaker:
+    instances:
+      clientService:
+        register-health-indicator: true
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        permitted-number-of-calls-in-half-open-state: 3
+        automatic-transition-from-open-to-half-open-enabled: true
+        wait-duration-in-open-state: 5s
+        failure-rate-threshold: 50
+        event-consumer-buffer-size: 10
+
+  retry:
+    instances:
+      clientService:
+        max-attempts: 3
+        wait-duration: 1s
+
+  timelimiter:
+    instances:
+      clientService:
+        timeout-duration: 2s
+
+# Management endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+# Swagger Documentation
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+# Logging
+logging:
+  level:
+    com.seguradora: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
