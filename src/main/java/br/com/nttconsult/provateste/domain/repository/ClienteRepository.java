@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface ClienteRepository extends JpaRepository<ClienteEntity, String>{
 
     ClienteEntity salvar(ClienteEntity cliente);
-    Optional<Cliente> buscarPorCpf(String cpf);
+    Optional<ClienteEntity> buscarPorCpf(String cpf);
     List<ClienteEntity> buscarTodos();
     void deletar(String cpf);
     boolean existePorCpf(String cpf);
