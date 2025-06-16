@@ -1,6 +1,6 @@
-package br.com.nttconsult.provateste.domain.repository;
+package br.com.nttconsult.provateste.repository;
 
-import br.com.nttconsult.provateste.domain.model.Seguro;
+import br.com.nttconsult.provateste.model.Seguro;
 
 import java.util.List;
 import java.util.Optional;

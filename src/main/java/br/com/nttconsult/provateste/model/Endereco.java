@@ -1,4 +1,4 @@
-package br.com.nttconsult.provateste.domain.model;
+package br.com.nttconsult.provateste.model;
 
 import java.util.Objects;
 
