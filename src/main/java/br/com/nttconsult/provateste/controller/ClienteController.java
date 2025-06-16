@@ -38,8 +38,7 @@ public class ClienteController {
     @GetMapping("/{cpf}")
     public ClienteDTO retornaClientePeloCpf(@PathVariable String cpf) throws Exception{
         Cliente clienteRecuperado = this.clienteService.getClienteByCpf(cpf);
-        //return ClienteDTO.a(clienteRecuperado);
-        return null;
+        return ClienteDTO.getClienteDTO(clienteRecuperado);
     }
 
     @DeleteMapping("/{cpf}")
