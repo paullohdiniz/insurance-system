@@ -31,26 +31,20 @@ public class ClienteController {
 
     @GetMapping()
     public List<ClienteDTO> getAllClientes() {
-        List <ClienteDTO> retorno = this.clienteService.getAllClientes();
+        List<ClienteDTO> retorno = this.clienteService.getAllClientes();
         return retorno;
     }
 
     @GetMapping("/{cpf}")
-    public ClienteDTO getClienteByCpf(@PathVariable String cpf) throws Exception{
+    public ClienteDTO getClienteByCpf(@PathVariable String cpf) throws Exception {
         Cliente clienteRecuperado = this.clienteService.getClienteByCpf(cpf);
         return ClienteDTO.getClienteDTO(clienteRecuperado);
     }
 
     @DeleteMapping("/{cpf}")
-    public ResponseEntity<String> delete(@PathVariable String cpf) throws Exception{
+    public ResponseEntity<String> delete(@PathVariable String cpf) throws Exception {
         clienteService.deleteClienteByCpf(cpf);
         return ResponseEntity.ok("Cliente excluido.");
     }
 
-   /*@PutMapping("/{cpf}")
-    public ClienteDTO alterarCliente (@PathVariable String cpf, @Valid @RequestBody ClienteDTO cliente) throws Exception {
-        Cliente clienteRequest = ClienteDTO.getClienteDTO(cliente);
-        Cliente clienteAlterado = this.clienteService.modifyCliente(cpf, clienteRequest);
-        return ClienteDTO.retornaCliente(clienteAlterado);
-    }*/
 }
