@@ -25,32 +25,32 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente cadastraCliente(@Valid @RequestBody Cliente cliente) throws Exception {
+    public Cliente save(@Valid @RequestBody Cliente cliente) throws Exception {
         return this.clienteService.save(cliente);
     }
 
     @GetMapping()
-    public List<ClienteDTO> retornaTodosOsClientes() {
+    public List<ClienteDTO> getAllClientes() {
         List <ClienteDTO> retorno = this.clienteService.getAllClientes();
         return retorno;
     }
 
     @GetMapping("/{cpf}")
-    public ClienteDTO retornaClientePeloCpf(@PathVariable String cpf) throws Exception{
+    public ClienteDTO getClienteByCpf(@PathVariable String cpf) throws Exception{
         Cliente clienteRecuperado = this.clienteService.getClienteByCpf(cpf);
         return ClienteDTO.getClienteDTO(clienteRecuperado);
     }
 
     @DeleteMapping("/{cpf}")
-    public ResponseEntity<String> deletarCliente(@PathVariable String cpf) throws Exception{
+    public ResponseEntity<String> delete(@PathVariable String cpf) throws Exception{
         clienteService.deleteClienteByCpf(cpf);
-        return ResponseEntity.ok("Cliente Excluido");
+        return ResponseEntity.ok("Cliente excluido.");
     }
 
-   /* @PutMapping("/{cpf}")
-    public ClienteDTO alterarCliente (@PathVariable String cpf, @Valid @RequestBody ClienteDTO cliente) throws ClienteNaoEncontradoException {
-        Cliente clienteRequest = ClienteDTO.(cliente);
-        Cliente clienteAlterado = this.clienteService.alteraCliente(cpf, clienteRequest);
+   /*@PutMapping("/{cpf}")
+    public ClienteDTO alterarCliente (@PathVariable String cpf, @Valid @RequestBody ClienteDTO cliente) throws Exception {
+        Cliente clienteRequest = ClienteDTO.getClienteDTO(cliente);
+        Cliente clienteAlterado = this.clienteService.modifyCliente(cpf, clienteRequest);
         return ClienteDTO.retornaCliente(clienteAlterado);
     }*/
 }

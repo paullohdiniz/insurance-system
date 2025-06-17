@@ -59,7 +59,7 @@ public class ClienteService {
         }
     }
 
-    public Cliente alteraCliente(String cpf, @Valid Cliente cliente) throws Exception {
+    public Cliente modifyCliente(String cpf, @Valid Cliente cliente) throws Exception {
 
         if(this.clienteRepository.existsByCpf(cpf)) {
             Cliente clienteASerAlterado = this.clienteRepository.findByCpf(cpf);
